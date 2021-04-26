@@ -1,19 +1,23 @@
 import React from 'react';
 
 interface Props{
-    fontSize: number,
-    effects: string,
+    styles: {
+        fontSize: number;
+        effect: string;
+    }
     setStyles: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Customization: React.FC<Props> = ({ fontSize, effects, setStyles }) => {
-    function update(){
-        setStyles({ ...setStyles, fontSize: fontSize + 1 })
-    }
+const Customization: React.FC<Props> = ({ styles, setStyles }) => {
+
     return(
-        <div>
-            <div className="text-red-600">{fontSize}</div>
-            <button className="bg-green-400" onClick={update}>Here</button>
+        <div className="flex justify-between w-1/2">
+           <input type="number" className="fontSize" placeholder="10" onChange={e => setStyles({...styles, fontSize: e.target.value })} />
+           <select className="effect" defaultValue="shadow" onChange={e => setStyles({...styles, effect: e.target.value })} >
+               <option value="shadow" >Shadow</option>
+               <option value="scanned">Scanned</option>
+               <option value="no-effect">No-effect</option>
+           </select>
         </div>
     )
 }

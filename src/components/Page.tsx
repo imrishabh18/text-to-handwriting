@@ -2,27 +2,82 @@ import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 
 interface Props {
-  fontSize: number;
-  effects: string;
+  styles: {
+    fontSize: number;
+    effect: string;
+  };
 }
 
-const Page: React.FC<Props> = ({ fontSize, effects }) => {
-  console.log(fontSize);
-  const generateCanvas = () => {
+const Page: React.FC<Props> = (styles) => {
+  const pageElement: HTMLElement = document.querySelectorAll(
+    ".pinkMarginedLines"
+  )[0] as HTMLElement;
+  let pageContent: HTMLElement = document.getElementsByClassName(
+    "contentPage"
+  )[0] as HTMLElement;
+  const pageOverlay: HTMLElement = document.querySelectorAll(
+    ".overlay"
+  )[0] as HTMLElement;
+  const outputImages: HTMLElement = document.querySelectorAll(
+    ".output"
+  )[0] as HTMLElement;
+
+  //Page styling for the image to give real paper effect.
+  const applyPageStyles = () => {
+    pageElement.style.border = "none";
+    pageElement.style.overflowY = "hidden";
+    pageOverlay.style.display = "block";
+
+    if (styles.styles.effect == "scanned") {
+      pageOverlay.style.background = `linear-gradient(${
+        Math.floor(Math.random() * (120 - 50 + 1)) + 50
+      }deg, #0008, #0000`;
+    } else if (styles.styles.effect == "shadow") {
+      pageOverlay.style.background = `linear-gradient(${
+        Math.random() * 360
+      }deg, #0008, #0000)`;
+    }
+  };
+
+  const removePageStyles = () => {
+    pageElement.style.border = "1px solid var(--elevation-background)";
+    pageElement.style.overflowY = "auto";
+    pageOverlay.style.display = "none";
+  };
+
+  // To generate the canvas image of the page.
+  const generateCanvas = async () => {
+    applyPageStyles();
     const element = document.getElementById("capture")!;
-    html2canvas(element).then((canvas) => {
-      document.body.appendChild(canvas);
-    });
+    await html2canvas(element, { windowHeight: 100, windowWidth: 100 }).then(
+      (canvas) => {
+        // document.body.appendChild(canvas);
+        outputImages.innerHTML = `
+          <div>
+            <img src=${canvas.toDataURL("image/png")} className="outputImage"/>
+          </div>
+        `
+        const image = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/oct");
+        // window.location.href = image;
+      }
+    );
+    removePageStyles();
   };
 
   return (
     <>
-      <div className="pageContainer flex-1" id="capture">
-        <div className="pinkMarginedLines">
+      <div className="pageContainer flex-1">
+        <div className="pinkMarginedLines" id="capture">
           <div className="topMargin"></div>
           <div className="midPage flex-col">
             <div className="leftMargin"></div>
-            <div contentEditable="true" className="contentPage">
+            <div
+              contentEditable="true"
+              className="contentPage"
+              style={{ fontSize: `${styles.styles.fontSize}pt` }}
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
               rhoncus dui eget tortor feugiat iaculis. Morbi et dolor in felis
               viverra efficitur. Integer id laoreet arcu. Mauris turpis nibh,
@@ -44,12 +99,16 @@ const Page: React.FC<Props> = ({ fontSize, effects }) => {
           <div className="overlay"></div>
         </div>
       </div>
+
       <button
         className="button bg-yellow-100 rounded-2xl p-2"
         onClick={generateCanvas}
       >
-        Generate Imgae
+        Generate Image
       </button>
+
+      <div className="output">
+      </div>
     </>
   );
 };

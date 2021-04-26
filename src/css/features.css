@@ -5,7 +5,7 @@
 }
 /* CSS Variables */
 body {
-  --background-primary: #fff;
+  --background-primary: #1c1624;
   --font-color-primary: #333;
   --elevation-background: #f3f3f3;
   --link-color: #006eb8;
@@ -19,14 +19,49 @@ body {
   --primary-button-color: #eee;
   --font-color-delete: #dc3545;
   --delete-button-borders: #dc3545;
+  --button-color: #fae428;
 }
 
 body {
-  background-color: var(--primary-button-bg);
   color: var(--font-color-primary);
   padding: 100px 100px;
   font-size: 1.05rem;
   font-family: var(--font-family-primary);
+  background: -webkit-linear-gradient(
+    45deg,
+    #1c1624 25%,
+    #21192b 25%,
+    #21192b 50%,
+    #1c1624 50%,
+    #1c1624 75%3aa19b
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    #1c1624 25%,
+    #21192b 25%,
+    #21192b 50%,
+    #1c1624 50%,
+    #1c1624 75%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    #1c1624 25%,
+    #21192b 25%,
+    #21192b 50%,
+    #1c1624 50%,
+    #1c1624 75%
+  );
+  background: linear-gradient(
+    45deg,
+    #1c1624 25%,
+    #21192b 25%,
+    #21192b 50%,
+    #1c1624 50%,
+    #1c1624 75%,
+    #21192b 75%,
+    #21192b
+  );
+  background-size: 100px 100px;
 }
 
 /* Page canvas styling */
@@ -94,3 +129,11 @@ body {
   width: 100%;
   display: none;
 }
+
+.output img {
+  transform: scale(0.4);
+}
+
+/* .overlay .shadow {
+  display: block;
+} */
