@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Customization from "./components/Customization";
 import FAQ from "./components/FAQ";
+import Header from "./components/Header";
 import Page from "./components/Page";
 
 interface pageStyle {
@@ -15,8 +16,10 @@ const App: React.FC = () => {
   })
 
   return (
-    <div className="App h-full w-full">
-      <div className="flex-col justify-between">
+    <div className="App">
+      <Header />
+      <hr />
+      <div className="flex">
         <Page styles={styles} />
         <Customization styles={styles} setStyles={setStyles} />
       </div>

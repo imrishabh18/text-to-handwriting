@@ -48,7 +48,7 @@ const Page: React.FC<Props> = (styles) => {
   // To generate the canvas image of the page.
   const generateCanvas = async () => {
     applyPageStyles();
-    const element = document.getElementById("capture")!;
+    const element: HTMLElement = document.querySelectorAll("#capture")[0] as HTMLElement;
     await html2canvas(element, { windowHeight: 100, windowWidth: 100 }).then(
       (canvas) => {
         // document.body.appendChild(canvas);
@@ -67,8 +67,9 @@ const Page: React.FC<Props> = (styles) => {
   };
 
   return (
-    <>
+    <div className="w-full h-full flex-1">
       <div className="pageContainer flex-1">
+      <h4 className="pb-2 text-sm">Type/paste text here</h4>
         <div className="pinkMarginedLines" id="capture">
           <div className="topMargin"></div>
           <div className="midPage flex-col">
@@ -101,7 +102,7 @@ const Page: React.FC<Props> = (styles) => {
       </div>
 
       <button
-        className="button bg-yellow-100 rounded-2xl p-2"
+        className="generateButton p-3"
         onClick={generateCanvas}
       >
         Generate Image
@@ -109,7 +110,7 @@ const Page: React.FC<Props> = (styles) => {
 
       <div className="output">
       </div>
-    </>
+    </div>
   );
 };
 
