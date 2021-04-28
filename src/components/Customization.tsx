@@ -4,19 +4,25 @@ interface Props {
   styles: {
     fontSize: number;
     effect: string;
+    inkColor: string;
+    fontFamily: string;
+    letterSpacing: number;
+    margin: boolean;
+    lines: boolean;
   };
   setStyles: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Customization: React.FC<Props> = ({ styles, setStyles }) => {
   return (
-    <div className="customization flex-1 w-1/2 -ml-40">
-      <h2 className="text-2xl font-bold pl-40 mb-10">Customizations</h2>
+    <div className="customization flex-1 w-1/2">
+      <h2 className="text-2xl font-bold pl-28 mb-10">Customizations</h2>
       <div className="flex justify-around">
         <div className="flex-col">
           <h4>Font Size :</h4>
           <input
             type="number"
+            defaultValue={10}
             className="rounded-full fontSize py-1 px-2 mt-2"
             placeholder="10"
             onChange={(e) => setStyles({ ...styles, fontSize: e.target.value })}
@@ -26,12 +32,12 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
           <h4>Ink color :</h4>
           <select
             className="ink rounded-full py-1 px-2 mt-2"
-            defaultValue="blue"
-            onChange={(e) => setStyles({ ...styles, effect: e.target.value })}
+            defaultValue="#000f55"
+            onChange={(e) => setStyles({ ...styles, inkColor: e.target.value })}
           >
-            <option value="Blue">Blue</option>
-            <option value="Red">Red</option>
-            <option value="Black">Black</option>
+            <option value="#000f55">Blue</option>
+            <option value="red">Red</option>
+            <option value="black">Black</option>
           </select>
         </div>
       </div>
@@ -63,12 +69,12 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
           <h4>Font Family :</h4>
           <select
             className="fontFamily rounded-full py-1 px-2 mt-2"
-            defaultValue="Heleav"
-            onChange={(e) => setStyles({ ...styles, effect: e.target.value })}
+            defaultValue="Homemade apple"
+            onChange={(e) => setStyles({ ...styles, fontFamily: e.target.value })}
           >
-            <option value="shadow">one</option>
-            <option value="scanner">two</option>
-            <option value="no-effect">three</option>
+            <option value="Homemade apple">Homemade apple</option>
+            <option value="Caveat">Caveat</option>
+            {/* <option value="">three</option> */}
           </select>
         </div>
         <div className="upload flex-col -ml-28">
@@ -80,20 +86,20 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
         <div className="flex-col pr-2">
           <h4>Paper Margin: </h4>
           <label className="switch mt-2">
-            <input type="checkbox" />
+            <input type="checkbox" defaultChecked={true} checked={styles.margin} onClick={ (e) => setStyles({ ...styles, margin: !styles.margin })} />
             <span className="slider round"></span>
           </label>
         </div>
         <div className="flex-col -ml-20">
           <h4>Paper Lines: </h4>
           <label className="switch mt-2">
-            <input type="checkbox" />
+            <input className="checkbox" type="checkbox" defaultChecked={true} checked={styles.lines} onClick={ (e) => setStyles({ ...styles, lines: !styles.lines })} />
             <span className="slider round"></span>
           </label>
         </div>
       </div>
 
-      
+
     </div>
   );
 };

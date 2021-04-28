@@ -1,10 +1,16 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
+import { image } from "html2canvas/dist/types/css/types/image";
 
 interface Props {
   styles: {
     fontSize: number;
     effect: string;
+    inkColor: string;
+    fontFamily: string;
+    letterSpacing: number;
+    margin: boolean;
+    lines: boolean;
   };
 }
 
@@ -12,27 +18,37 @@ const Page: React.FC<Props> = (styles) => {
   const pageElement: HTMLElement = document.querySelectorAll(
     ".pinkMarginedLines"
   )[0] as HTMLElement;
-  let pageContent: HTMLElement = document.getElementsByClassName(
-    "contentPage"
+  const pageContent: HTMLElement = document.querySelectorAll(
+    ".contentPage"
   )[0] as HTMLElement;
   const pageOverlay: HTMLElement = document.querySelectorAll(
     ".overlay"
   )[0] as HTMLElement;
   const outputImages: HTMLElement = document.querySelectorAll(
-    ".output"
+    ".array"
   )[0] as HTMLElement;
+  const topMargin: HTMLElement = document.querySelectorAll(
+    ".topMargin"
+  )[0] as HTMLElement;
+  const leftMargin: HTMLElement = document.querySelectorAll(
+    ".leftMargin"
+  )[0] as HTMLElement;
+  const tm: HTMLElement = document.querySelectorAll(".tm")[0] as HTMLElement;
+  const lm: HTMLElement = document.querySelectorAll(".lm")[0] as HTMLElement;
 
   //Page styling for the image to give real paper effect.
   const applyPageStyles = () => {
-    pageElement.style.border = "none";
-    pageElement.style.overflowY = "hidden";
-    pageOverlay.style.display = "block";
+    if (pageElement) {
+      pageElement.style.border = "none";
+      pageElement.style.overflowY = "hidden";
+      pageOverlay.style.display = "block";
+    }
 
-    if (styles.styles.effect == "scanned") {
+    if (styles.styles.effect == "scanned" && pageOverlay) {
       pageOverlay.style.background = `linear-gradient(${
         Math.floor(Math.random() * (120 - 50 + 1)) + 50
       }deg, #0008, #0000`;
-    } else if (styles.styles.effect == "shadow") {
+    } else if (styles.styles.effect == "shadow" && pageOverlay) {
       pageOverlay.style.background = `linear-gradient(${
         Math.random() * 360
       }deg, #0008, #0000)`;
@@ -48,36 +64,78 @@ const Page: React.FC<Props> = (styles) => {
   // To generate the canvas image of the page.
   const generateCanvas = async () => {
     applyPageStyles();
-    const element: HTMLElement = document.querySelectorAll("#capture")[0] as HTMLElement;
-    await html2canvas(element, { windowHeight: 100, windowWidth: 100 }).then(
-      (canvas) => {
-        // document.body.appendChild(canvas);
+    const element: HTMLElement = document.querySelectorAll(
+      "#capture"
+    )[0] as HTMLElement;
+    const options = {
+      scrollX: 0,
+      scrollY: -window.scrollY,
+      useCORS: true,
+    };
+    await html2canvas(element, options).then((canvas) => {
+      if (outputImages) {
         outputImages.innerHTML = `
-          <div>
-            <img src=${canvas.toDataURL("image/png")} className="outputImage"/>
-          </div>
-        `
-        const image = canvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/oct");
-        // window.location.href = image;
+            <img src=${canvas.toDataURL("image/png")} class="outputImage"/>
+            <a
+          class="downloadButton"
+          style="position: absolute;background-color: #006eb8 !important;border-radius: 20px;padding: 15px;color: white; top: 120% !important;"
+          href=${canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/oct")}
+        >
+          Download Image
+        </a>
+        `;
       }
-    );
+    });
     removePageStyles();
   };
 
+  useEffect(() => {
+    //margin style removal
+    if (styles.styles.margin == false && pageContent) {
+      setTimeout(() => {
+        pageContent.style.paddingLeft = "15px";
+        tm.classList.remove("topMargin");
+        lm.classList.remove("leftMargin");
+      }, 300);
+    } else if (styles.styles.margin && pageContent) {
+      setTimeout(() => {
+        pageContent.style.paddingLeft = "55px";
+        tm.classList.add("topMargin");
+        lm.classList.add("leftMargin");
+      }, 300);
+    }
+
+    //lines style removal
+    if (styles.styles.lines == false && pageContent) {
+      setTimeout(() => (pageContent.style.backgroundImage = "none"), 300);
+    } else if (styles.styles.lines && pageContent) {
+      setTimeout(
+        () =>
+          (pageContent.style.backgroundImage =
+            "linear-gradient(#999 0.05em, transparent 0.1em)"),
+        300
+      );
+    }
+  }, [styles.styles.margin, styles.styles.lines]);
+
   return (
-    <div className="w-full h-full flex-1">
+    <div className="w-full flex-1 pl-32 pt-20">
       <div className="pageContainer flex-1">
-      <h4 className="pb-2 text-sm">Type/paste text here</h4>
+        <h4 className="pb-2 text-sm">Type/paste text here</h4>
         <div className="pinkMarginedLines" id="capture">
-          <div className="topMargin"></div>
+          <div className="topMargin tm"></div>
           <div className="midPage flex-col">
-            <div className="leftMargin"></div>
+            <div className="leftMargin lm"></div>
             <div
               contentEditable="true"
-              className="contentPage"
-              style={{ fontSize: `${styles.styles.fontSize}pt` }}
+              className="contentPage cp"
+              style={{
+                fontSize: `${styles.styles.fontSize}pt`,
+                color: styles.styles.inkColor,
+                fontFamily: `${styles.styles.fontFamily}`,
+              }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
               rhoncus dui eget tortor feugiat iaculis. Morbi et dolor in felis
@@ -100,15 +158,17 @@ const Page: React.FC<Props> = (styles) => {
           <div className="overlay"></div>
         </div>
       </div>
-
-      <button
-        className="generateButton p-3"
-        onClick={generateCanvas}
-      >
-        Generate Image
-      </button>
-
-      <div className="output">
+      <div className="w-full flex items-center">
+        <button
+          className="generateButton mt-10 p-3 text-white rounded-2xl"
+          onClick={generateCanvas}
+        >
+          Generate Image
+        </button>
+      </div>
+      <div className="output relative w-full">
+        <h1 className="text-4xl pt-10">Output</h1>
+        <div className="array"></div>
       </div>
     </div>
   );

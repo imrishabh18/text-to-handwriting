@@ -92,9 +92,13 @@ body {
 }
 /* End of navbar & banner */
 
+.middle{
+  height: calc(100vh - 80px);
+}
+
 /* Page canvas styling */
 .pageContainer {
-  padding: 100px 100px;
+  /* padding: 100px 100px; */
 }
 .pinkMarginedLines {
   width: 400px;
@@ -107,7 +111,7 @@ body {
   font-family: var(--handwriting-font);
   color: var(--ink-color);
   line-height: 1.5em;
-  overflow-y: auto;
+  overflow-y: hidden;
   scrollbar-color: transparent;
   scrollbar-width: thin;
 }
@@ -243,24 +247,38 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.upload{
-  /* padding-left: 100px; */
-}
 
 .upload input[type='file']{
   color: transparent;
   width: 100px;
 }
 
+.generateButton{
+  background-color: var(--link-color) !important;
+}
+
+.generateButton:focus{
+  outline: none;
+}
 /* Customisation end */
 
+
 /* output */
+.output{
+  height: 500px;
+}
+
+.array{
+  height: 500px;
+}
+
 .output img {
   transform: scale(0.4);
+  margin-top: -38% !important;
+  margin-left: -28% !important;
 }
+
 
 /* output end */
 
-/* .overlay .shadow {
-  display: block;
-} */
+
