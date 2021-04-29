@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/text-to-handwriting/static/css/main.2e4bfb66.chunk.css",
-    "main.js": "/text-to-handwriting/static/js/main.ebc94a18.chunk.js",
-    "main.js.map": "/text-to-handwriting/static/js/main.ebc94a18.chunk.js.map",
+    "main.js": "/text-to-handwriting/static/js/main.bc347460.chunk.js",
+    "main.js.map": "/text-to-handwriting/static/js/main.bc347460.chunk.js.map",
     "runtime-main.js": "/text-to-handwriting/static/js/runtime-main.67a5421d.js",
     "runtime-main.js.map": "/text-to-handwriting/static/js/runtime-main.67a5421d.js.map",
     "static/js/2.034bfa8b.chunk.js": "/text-to-handwriting/static/js/2.034bfa8b.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.67a5421d.js",
     "static/js/2.034bfa8b.chunk.js",
     "static/css/main.2e4bfb66.chunk.css",
-    "static/js/main.ebc94a18.chunk.js"
+    "static/js/main.bc347460.chunk.js"
   ]
 }
