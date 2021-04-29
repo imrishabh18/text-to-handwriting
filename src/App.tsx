@@ -23,13 +23,9 @@ const App: React.FC = () => {
       checkBoxAuto.click();
       console.log("clicked");
     }, 200);
-    // var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    // if(isMobile){
-    //   console.log("mobile")
-    // }
   }, []);
-  
-
+  const mobile = window.innerWidth < 800 ? true : false;
+  console.log(window.innerWidth)
   const [styles, setStyles] = useState<pageStyle>({
     fontSize: 10,
     effect: "shadow",
@@ -42,14 +38,18 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div className="App">
-        <Header />
-        <hr />
-        <div className="flex middle">
-          <Page styles={styles} />
-          <Customization styles={styles} setStyles={setStyles} />
+      {!mobile ? (
+        <div className="App">
+          <Header />
+          <hr />
+          <div className="flex middle">
+            <Page styles={styles} />
+            <Customization styles={styles} setStyles={setStyles} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div>Please open this website in your PC or Laptop 🙏. Currently, not supported for mobile browsers</div>
+      )}
     </>
   );
 };
