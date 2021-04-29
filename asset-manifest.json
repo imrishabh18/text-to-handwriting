@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.e719617d.chunk.css",
-    "main.js": "/static/js/main.7272be32.chunk.js",
-    "main.js.map": "/static/js/main.7272be32.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.ccb73123.js",
-    "runtime-main.js.map": "/static/js/runtime-main.ccb73123.js.map",
-    "static/js/2.5b754ace.chunk.js": "/static/js/2.5b754ace.chunk.js",
-    "static/js/2.5b754ace.chunk.js.map": "/static/js/2.5b754ace.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.e719617d.chunk.css.map": "/static/css/main.e719617d.chunk.css.map",
-    "static/js/2.5b754ace.chunk.js.LICENSE.txt": "/static/js/2.5b754ace.chunk.js.LICENSE.txt",
-    "static/media/features.css": "/static/media/bg.806b189d.jpg",
-    "static/media/pencil.c740dbff.svg": "/static/media/pencil.c740dbff.svg"
+    "main.css": "/text-to-handwriting/static/css/main.10f8960a.chunk.css",
+    "main.js": "/text-to-handwriting/static/js/main.80388643.chunk.js",
+    "main.js.map": "/text-to-handwriting/static/js/main.80388643.chunk.js.map",
+    "runtime-main.js": "/text-to-handwriting/static/js/runtime-main.67a5421d.js",
+    "runtime-main.js.map": "/text-to-handwriting/static/js/runtime-main.67a5421d.js.map",
+    "static/js/2.5b754ace.chunk.js": "/text-to-handwriting/static/js/2.5b754ace.chunk.js",
+    "static/js/2.5b754ace.chunk.js.map": "/text-to-handwriting/static/js/2.5b754ace.chunk.js.map",
+    "index.html": "/text-to-handwriting/index.html",
+    "static/css/main.10f8960a.chunk.css.map": "/text-to-handwriting/static/css/main.10f8960a.chunk.css.map",
+    "static/js/2.5b754ace.chunk.js.LICENSE.txt": "/text-to-handwriting/static/js/2.5b754ace.chunk.js.LICENSE.txt",
+    "static/media/features.css": "/text-to-handwriting/static/media/bg.806b189d.jpg",
+    "static/media/pencil.c740dbff.svg": "/text-to-handwriting/static/media/pencil.c740dbff.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.ccb73123.js",
+    "static/js/runtime-main.67a5421d.js",
     "static/js/2.5b754ace.chunk.js",
-    "static/css/main.e719617d.chunk.css",
-    "static/js/main.7272be32.chunk.js"
+    "static/css/main.10f8960a.chunk.css",
+    "static/js/main.80388643.chunk.js"
   ]
 }
