@@ -48,7 +48,9 @@ const App: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div>Please open this website in your PC or Laptop 🙏. Currently, not supported for mobile browsers</div>
+        <div className="h-screen w-screen flex items-center justify-center px-10 font-sans">
+          <h1>Please open this website in your PC or Laptop 🙏. Currently, not supported for mobile browsers</h1>
+        </div>
       )}
     </>
   );
