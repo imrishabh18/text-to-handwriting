@@ -4,6 +4,10 @@ import Typewriter from "typewriter-effect";
 import Pencil from "../assets/pencil.svg";
 
 const Header: React.FC = () => {
+  const scroll = () => {
+    const top: HTMLElement = document.querySelectorAll(".customization")[0] as HTMLElement;
+    top.scrollIntoView()
+  }
   return (
     <div className="header">
       <div className="Navbar sticky top-0 flex justify-between items-center px-28">
@@ -28,7 +32,7 @@ const Header: React.FC = () => {
             />
           </h1>
           <div className="startNow pt-10">
-            <button className="rounded-full px-4 py-2 font-semibold text-xl">Try now</button>
+            <button onClick={scroll} className="rounded-full px-4 py-2 font-semibold text-xl">Try now</button>
           </div>
         </div>
         <img

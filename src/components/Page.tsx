@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import { image } from "html2canvas/dist/types/css/types/image";
+import { backgroundSize } from "html2canvas/dist/types/css/property-descriptors/background-size";
 
 interface Props {
   styles: {
@@ -8,7 +9,7 @@ interface Props {
     effect: string;
     inkColor: string;
     fontFamily: string;
-    letterSpacing: number;
+    verticalSpacing: number;
     margin: boolean;
     lines: boolean;
   };
@@ -57,12 +58,13 @@ const Page: React.FC<Props> = (styles) => {
 
   const removePageStyles = () => {
     pageElement.style.border = "1px solid var(--elevation-background)";
-    pageElement.style.overflowY = "auto";
+    pageElement.style.overflowY = "hidden";
     pageOverlay.style.display = "none";
   };
 
   // To generate the canvas image of the page.
   const generateCanvas = async () => {
+    console.log("here")
     applyPageStyles();
     const element: HTMLElement = document.querySelectorAll(
       "#capture"
@@ -77,6 +79,7 @@ const Page: React.FC<Props> = (styles) => {
         outputImages.innerHTML = `
             <img src=${canvas.toDataURL("image/png")} class="outputImage"/>
             <a
+            download="image.png"
           class="downloadButton"
           style="position: absolute;background-color: #006eb8 !important;border-radius: 20px;padding: 15px;color: white; top: 120% !important;"
           href=${canvas
@@ -135,6 +138,8 @@ const Page: React.FC<Props> = (styles) => {
                 fontSize: `${styles.styles.fontSize}pt`,
                 color: styles.styles.inkColor,
                 fontFamily: `${styles.styles.fontFamily}`,
+                paddingTop: `${styles.styles.verticalSpacing}pt`,
+                // backgroundSize: `100% `
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -160,7 +165,7 @@ const Page: React.FC<Props> = (styles) => {
       </div>
       <div className="w-full flex items-center">
         <button
-          className="generateButton mt-10 p-3 text-white rounded-2xl"
+          className="generateButton mt-10 p-3 text-white rounded-2xl z-10"
           onClick={generateCanvas}
         >
           Generate Image

@@ -9,7 +9,7 @@ interface pageStyle {
   effect: string;
   inkColor: string;
   fontFamily: string;
-  letterSpacing: number;
+  verticalSpacing: number;
   margin: boolean;
   lines: boolean;
 }
@@ -23,27 +23,34 @@ const App: React.FC = () => {
       checkBoxAuto.click();
       console.log("clicked");
     }, 200);
+    // var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // if(isMobile){
+    //   console.log("mobile")
+    // }
   }, []);
+  
 
   const [styles, setStyles] = useState<pageStyle>({
     fontSize: 10,
     effect: "shadow",
     inkColor: "#000f55",
     fontFamily: "Homemade apple",
-    letterSpacing: 0,
+    verticalSpacing: 3,
     margin: true,
     lines: false,
   });
 
   return (
-    <div className="App">
-      <Header />
-      <hr />
-      <div className="flex middle">
-        <Page styles={styles} />
-        <Customization styles={styles} setStyles={setStyles} />
+    <>
+      <div className="App">
+        <Header />
+        <hr />
+        <div className="flex middle">
+          <Page styles={styles} />
+          <Customization styles={styles} setStyles={setStyles} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

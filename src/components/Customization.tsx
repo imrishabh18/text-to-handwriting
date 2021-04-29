@@ -1,3 +1,4 @@
+import { parse } from "node:path";
 import React from "react";
 
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
     effect: string;
     inkColor: string;
     fontFamily: string;
-    letterSpacing: number;
+    verticalSpacing: number;
     margin: boolean;
     lines: boolean;
   };
@@ -22,10 +23,16 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
           <h4>Font Size :</h4>
           <input
             type="number"
+            min={0}
             defaultValue={10}
             className="rounded-full fontSize py-1 px-2 mt-2"
             placeholder="10"
-            onChange={(e) => setStyles({ ...styles, fontSize: e.target.value })}
+            onChange={(e) => {
+              if (parseInt(e.target.value) < 25) {
+                e.preventDefault();
+                setStyles({ ...styles, fontSize: e.target.value });
+              }
+            }}
           />
         </div>
         <div className="flex-col">
@@ -43,12 +50,15 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
       </div>
       <div className="flex justify-around pt-10">
         <div className="flex-col">
-          <h4>Letter Spacing :</h4>
+          <h4>Vertical Spacing :</h4>
           <input
             type="number"
-            className="rounded-full fontSize py-1 px-2 mt-2"
-            placeholder="10"
-            onChange={(e) => setStyles({ ...styles, fontSize: e.target.value })}
+            defaultValue={3}
+            className="rounded-full verticalSpacing py-1 px-2 mt-2"
+            placeholder="3"
+            onChange={(e) =>
+              setStyles({ ...styles, verticalSpacing: e.target.value })
+            }
           />
         </div>
         <div className="flex-col">
@@ -70,7 +80,9 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
           <select
             className="fontFamily rounded-full py-1 px-2 mt-2"
             defaultValue="Homemade apple"
-            onChange={(e) => setStyles({ ...styles, fontFamily: e.target.value })}
+            onChange={(e) =>
+              setStyles({ ...styles, fontFamily: e.target.value })
+            }
           >
             <option value="Homemade apple">Homemade apple</option>
             <option value="Caveat">Caveat</option>
@@ -79,27 +91,41 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
         </div>
         <div className="upload flex-col -ml-28">
           <h4>Upload :</h4>
-          <input className="mt-2 rounded-full bg-transparent text-white" type="file" value="" title=" " />
+          <input
+            className="mt-2 rounded-full bg-transparent text-white"
+            type="file"
+            value=""
+            title=" "
+          />
         </div>
       </div>
       <div className="flex justify-around pt-10 -ml-16">
         <div className="flex-col pr-2">
           <h4>Paper Margin: </h4>
           <label className="switch mt-2">
-            <input type="checkbox" defaultChecked={true} checked={styles.margin} onClick={ (e) => setStyles({ ...styles, margin: !styles.margin })} />
+            <input
+              type="checkbox"
+              defaultChecked={true}
+              checked={styles.margin}
+              onClick={(e) => setStyles({ ...styles, margin: !styles.margin })}
+            />
             <span className="slider round"></span>
           </label>
         </div>
         <div className="flex-col -ml-20">
           <h4>Paper Lines: </h4>
           <label className="switch mt-2">
-            <input className="checkbox" type="checkbox" defaultChecked={true} checked={styles.lines} onClick={ (e) => setStyles({ ...styles, lines: !styles.lines })} />
+            <input
+              className="checkbox"
+              type="checkbox"
+              defaultChecked={true}
+              checked={styles.lines}
+              onClick={(e) => setStyles({ ...styles, lines: !styles.lines })}
+            />
             <span className="slider round"></span>
           </label>
         </div>
       </div>
-
-
     </div>
   );
 };
