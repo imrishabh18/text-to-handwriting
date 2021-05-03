@@ -39,7 +39,7 @@ const Output: React.FC<Props> = ({ array }) => {
   return (
     <div className="output relative w-4/6 mx-32">
       <h1 className="text-4xl pt-10 pb-4">Output</h1>
-      { array.length > 0 ? <div className="array"></div> : <div className="noOutput mt-10 border-gray-100 border-2 text-gray-400 text-2xl flex justify-center items-center h-4/6">
+      { array.length > 0 ? <div className="array"></div> : <div className="noOutput mt-10 border-gray-200 border-2 text-gray-400 text-2xl flex justify-center items-center h-4/6">
           No output
       </div> }
     </div>

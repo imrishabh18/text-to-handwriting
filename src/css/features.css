@@ -9,7 +9,7 @@ body {
   --font-color-primary: #333;
   --elevation-background: #f3f3f3;
   --link-color: #006eb8;
-  --font-family-primary: "Roboto", cursive;
+  --font-family-primary: "Montserrat", cursive;
   --handwriting-font: "Homemade Apple", cursive;
   --primary-color: #1a73e8;
   --ink-color: #000f55;
@@ -21,12 +21,13 @@ body {
   --delete-button-borders: #dc3545;
   --button-color: #fae428;
   --navbar-color: #3f79fb;
+  /* overflow-x: hidden; */
 }
 
 body {
   color: var(--font-color-primary);
   font-size: 1.05rem;
-  font-family: "Roboto", "sans-serif";
+  font-family: var(--font-family-primary);
   background-size: 100px 100px;
 }
 

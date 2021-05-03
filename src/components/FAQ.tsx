@@ -2,7 +2,7 @@ import React from 'react';
 
 const FAQ : React.FC = () => {
     return(
-    <div className="container mx-28">
+    <div className="container mx-28 w-3/4">
         <div className="faq-header">Frequently Asked Questions</div>
         
         <div className="faq-content">
