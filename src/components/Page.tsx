@@ -13,9 +13,12 @@ interface Props {
     margin: boolean;
     lines: boolean;
   };
+  array: Array<any>;
+  setArray: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Page: React.FC<Props> = (styles) => {
+
+const Page: React.FC<Props> = ({styles, array, setArray}) => {
   const pageElement: HTMLElement = document.querySelectorAll(
     ".pinkMarginedLines"
   )[0] as HTMLElement;
@@ -45,11 +48,11 @@ const Page: React.FC<Props> = (styles) => {
       pageOverlay.style.display = "block";
     }
 
-    if (styles.styles.effect == "scanned" && pageOverlay) {
+    if (styles.effect == "scanned" && pageOverlay) {
       pageOverlay.style.background = `linear-gradient(${
         Math.floor(Math.random() * (120 - 50 + 1)) + 50
       }deg, #0008, #0000`;
-    } else if (styles.styles.effect == "shadow" && pageOverlay) {
+    } else if (styles.effect == "shadow" && pageOverlay) {
       pageOverlay.style.background = `linear-gradient(${
         Math.random() * 360
       }deg, #0008, #0000)`;
@@ -64,7 +67,6 @@ const Page: React.FC<Props> = (styles) => {
 
   // To generate the canvas image of the page.
   const generateCanvas = async () => {
-    console.log("here")
     applyPageStyles();
     const element: HTMLElement = document.querySelectorAll(
       "#capture"
@@ -75,34 +77,20 @@ const Page: React.FC<Props> = (styles) => {
       useCORS: true,
     };
     await html2canvas(element, options).then((canvas) => {
-      if (outputImages) {
-        outputImages.innerHTML = `
-            <img src=${canvas.toDataURL("image/png")} class="outputImage"/>
-            <a
-            download="image.png"
-          class="downloadButton"
-          style="position: absolute;background-color: #006eb8 !important;border-radius: 20px;padding: 15px;color: white; top: 120% !important;"
-          href=${canvas
-            .toDataURL("image/png")
-            .replace("image/png", "image/oct")}
-        >
-          Download Image
-        </a>
-        `;
-      }
+        setArray([...array, canvas])
     });
     removePageStyles();
   };
 
   useEffect(() => {
     //margin style removal
-    if (styles.styles.margin == false && pageContent) {
+    if (styles.margin == false && pageContent) {
       setTimeout(() => {
         pageContent.style.paddingLeft = "15px";
         tm.classList.remove("topMargin");
         lm.classList.remove("leftMargin");
       }, 300);
-    } else if (styles.styles.margin && pageContent) {
+    } else if (styles.margin && pageContent) {
       setTimeout(() => {
         pageContent.style.paddingLeft = "55px";
         tm.classList.add("topMargin");
@@ -111,9 +99,9 @@ const Page: React.FC<Props> = (styles) => {
     }
 
     //lines style removal
-    if (styles.styles.lines == false && pageContent) {
+    if (styles.lines == false && pageContent) {
       setTimeout(() => (pageContent.style.backgroundImage = "none"), 300);
-    } else if (styles.styles.lines && pageContent) {
+    } else if (styles.lines && pageContent) {
       setTimeout(
         () =>
           (pageContent.style.backgroundImage =
@@ -121,7 +109,7 @@ const Page: React.FC<Props> = (styles) => {
         300
       );
     }
-  }, [styles.styles.margin, styles.styles.lines]);
+  }, [styles.margin, styles.lines]);
 
   return (
     <div className="w-full flex-1 pl-32 pt-20">
@@ -135,10 +123,10 @@ const Page: React.FC<Props> = (styles) => {
               contentEditable="true"
               className="contentPage cp"
               style={{
-                fontSize: `${styles.styles.fontSize}pt`,
-                color: styles.styles.inkColor,
-                fontFamily: `${styles.styles.fontFamily}`,
-                paddingTop: `${styles.styles.verticalSpacing}pt`,
+                fontSize: `${styles.fontSize}pt`,
+                color: styles.inkColor,
+                fontFamily: `${styles.fontFamily}`,
+                paddingTop: `${styles.verticalSpacing}pt`,
                 // backgroundSize: `100% `
               }}
             >
@@ -170,10 +158,6 @@ const Page: React.FC<Props> = (styles) => {
         >
           Generate Image
         </button>
-      </div>
-      <div className="output relative w-full">
-        <h1 className="text-4xl pt-10">Output</h1>
-        <div className="array"></div>
       </div>
     </div>
   );

@@ -16,8 +16,8 @@ interface Props {
 
 const Customization: React.FC<Props> = ({ styles, setStyles }) => {
   return (
-    <div className="customization flex-1 w-1/2">
-      <h2 className="text-2xl font-bold pl-28 mb-10">Customizations</h2>
+    <div className="customization w-1/2">
+      <h2 className="text-2xl pl-36 font-bold mb-10">Customizations</h2>
       <div className="flex justify-around">
         <div className="flex-col">
           <h4>Font Size :</h4>
@@ -86,7 +86,8 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
           >
             <option value="Homemade apple">Homemade apple</option>
             <option value="Caveat">Caveat</option>
-            {/* <option value="">three</option> */}
+            <option value="Shadows Into Light">Shawdows Into Light</option>
+
           </select>
         </div>
         <div className="upload flex-col -ml-28">
