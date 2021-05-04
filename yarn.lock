@@ -1782,6 +1782,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/css-font-loading-module@^0.0.4":
+  "integrity" "sha512-ENdXf7MW4m9HeDojB2Ukbi7lYMIuQNBHVf98dbzaiG4EEJREBd6oleVAjrLRCrp7dm6CK1mmdmU9tcgF61acbw=="
+  "resolved" "https://registry.npmjs.org/@types/css-font-loading-module/-/css-font-loading-module-0.0.4.tgz"
+  "version" "0.0.4"
+
 "@types/eslint@^7.2.6":
   "integrity" "sha512-I+1sYH+NPQ3/tVqCeUSBwTE/0heyvtXqpIopUUArlBm0Kpocb8FbMa3AZ/ASKIFpN3rnEx932TTXDbt9OXsNDw=="
   "resolved" "https://registry.npmjs.org/@types/eslint/-/eslint-7.2.6.tgz"

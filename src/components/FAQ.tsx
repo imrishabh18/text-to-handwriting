@@ -17,12 +17,12 @@ const FAQ : React.FC = () => {
             </div>
           </div>
           
-          {/* <div className="faq-question">
+          <div className="faq-question">
             <input id="q2" type="checkbox" className="panel" />
             <div className="plus">+</div>
             <label htmlFor="q2" className="panel-title">How can I get more fonts?</label>
-            <div className="panel-content">Checkout google fonts and download the font which you like or which is close to your type of handwriting.<br /> Upload the .ttf file in the Customization section and you are good to go.</div>
-          </div> */}
+            <div className="panel-content">Checkout google fonts and download the font which you like or which is close to your type of handwriting.<br /> Upload the .ttf or .otf file in the Customization section and you are good to go.</div>
+          </div>
           
           <div className="faq-question">
             <input id="q3" type="checkbox" className="panel" />
@@ -39,8 +39,8 @@ const FAQ : React.FC = () => {
           If you liked this tool and are using it, please do give it a GitHub star <a href="" className="text-blue-400" >here</a>. 
           <br/> Also, if you get caught by your teacher, tell them to star the repository as well. 😆
         </div>
-        <div className="flex justify-center end">
-          Created with ❤️ by <a className="pl-1 pb-1 font-bold" href="https://imrishabh18.github.io"> Rishabh</a>
+        <div className="flex end justify-center -mr-32">
+          Created with ❤️ by <a className="pl-1 pb-1 font-extrabold" href="https://imrishabh18.github.io"> Rishabh</a>
         </div>
     </div>
     )

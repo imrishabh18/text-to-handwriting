@@ -22,11 +22,9 @@ const App: React.FC = () => {
     )[0] as HTMLInputElement;
     setTimeout(() => {
       checkBoxAuto.click();
-      console.log("clicked");
     }, 200);
   }, []);
   const mobile = window.innerWidth < 800 ? true : false;
-  console.log(window.innerWidth)
   const [styles, setStyles] = useState<pageStyle>({
     fontSize: 10,
     effect: "shadow",

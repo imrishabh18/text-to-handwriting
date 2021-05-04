@@ -1,5 +1,5 @@
-import { parse } from "node:path";
 import React from "react";
+import addFontFromFile from "../helper/helper"
 
 interface Props {
   styles: {
@@ -87,16 +87,16 @@ const Customization: React.FC<Props> = ({ styles, setStyles }) => {
             <option value="Homemade apple">Homemade apple</option>
             <option value="Caveat">Caveat</option>
             <option value="Shadows Into Light">Shawdows Into Light</option>
-
+            {/* <option value="Dancing Script">Dancing Script</option> */}
           </select>
         </div>
         <div className="upload flex-col -ml-28">
           <h4>Upload :</h4>
           <input
+            accept=".ttf, .otf"
             className="mt-2 rounded-full bg-transparent text-white"
             type="file"
-            value=""
-            title=" "
+            onChange={(e) => addFontFromFile(e.target.files![0])}
           />
         </div>
       </div>
